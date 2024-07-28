@@ -3,6 +3,7 @@
 namespace FileBox_API.Controllers
 {
     [ApiController]
+   
     public class UserController : ControllerBase
     {
         [HttpGet]
@@ -11,5 +12,6 @@ namespace FileBox_API.Controllers
         {
             return Ok("Hello from UserController");
         }
+
     }
 }
