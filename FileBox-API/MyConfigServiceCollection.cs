@@ -1,4 +1,5 @@
-﻿using FileBox_API.Interfaces;
+﻿using FileBox_API.Infrastructure;
+using FileBox_API.Interfaces;
 using FileBox_API.Repositories;
 using FileBox_API.Services;
 
@@ -15,6 +16,8 @@ namespace FileBox_API
             //WordToPdf
             services.AddScoped<IWordToPdfService, WordToPdfService>();
             //-----------------------------
+            //Infrastructure 
+            services.AddScoped<IDbConnectionFactory, DbConnectionFactory>();
             return services;
         }
     }
