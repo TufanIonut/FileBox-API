@@ -9,9 +9,11 @@ namespace FileBox_API.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
-        public UserController(IUserRepository userRepository)
+        private readonly IUserService _userService;
+        public UserController(IUserRepository userRepository, IUserService userService)
         {
             _userRepository = userRepository;
+            _userService = userService;
         }
 
         [HttpPost]
@@ -26,6 +28,10 @@ namespace FileBox_API.Controllers
                 case -1:
                     return BadRequest("Login failed");
                 default:
+                    string path = "C:\\Users\\Ionut\\Desktop\\Licenta Cristi\\Archive\\Files";
+                    string fullpath = Path.Combine(path, loginRequest.Email);
+                    if (!Directory.Exists(fullpath))
+                        Directory.CreateDirectory(fullpath);
                     return Ok(IdUser);
             }
         }
@@ -33,7 +39,7 @@ namespace FileBox_API.Controllers
         [Route("Register")]
         public async Task<IActionResult> RegisterAsync(Login_Register_Request registerRequest)
         {
-            var IdUser = await _userRepository.RegisterAsyncRepo(registerRequest);
+            var IdUser = await _userService.RegisterAsyncService(registerRequest);
             if (IdUser != -1)
             {
                 return Ok(IdUser);
