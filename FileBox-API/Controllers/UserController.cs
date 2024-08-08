@@ -18,7 +18,7 @@ namespace FileBox_API.Controllers
 
         [HttpPost]
         [Route("Login")]
-        public async Task<IActionResult> LoginAsync(Login_Register_Request loginRequest)
+        public async Task<IActionResult> LoginAsync(Login_Request loginRequest)
         {
             var IdUser = await _userRepository.LoginAsyncRepo(loginRequest);
             switch (IdUser)
@@ -37,7 +37,7 @@ namespace FileBox_API.Controllers
         }
         [HttpPost]
         [Route("Register")]
-        public async Task<IActionResult> RegisterAsync(Login_Register_Request registerRequest)
+        public async Task<IActionResult> RegisterAsync(Register_Request registerRequest)
         {
             var IdUser = await _userService.RegisterAsyncService(registerRequest);
             if (IdUser != -1)

@@ -4,6 +4,6 @@ namespace FileBox_API.Interfaces
 {
     public interface IUserService
     {
-        Task<int> RegisterAsyncService(Login_Register_Request registerRequest);
+        Task<int> RegisterAsyncService(Register_Request registerRequest);
     }
 }

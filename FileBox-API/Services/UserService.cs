@@ -11,7 +11,7 @@ namespace FileBox_API.Services
         {
             _userRepository = userRepository;
         }
-        public async Task<int> RegisterAsyncService(Login_Register_Request registerRequest)
+        public async Task<int> RegisterAsyncService(Register_Request registerRequest)
         {
              var result = await _userRepository.RegisterAsyncRepo(registerRequest);
             if(result != -1)

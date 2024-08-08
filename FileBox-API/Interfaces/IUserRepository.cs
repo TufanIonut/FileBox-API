@@ -4,7 +4,7 @@ namespace FileBox_API.Interfaces
 {
     public interface IUserRepository
     {
-        Task<int> LoginAsyncRepo(Login_Register_Request loginRequest);
-        Task<int> RegisterAsyncRepo(Login_Register_Request registerRequest);
+        Task<int> LoginAsyncRepo(Login_Request loginRequest);
+        Task<int> RegisterAsyncRepo(Register_Request registerRequest);
     }
 }

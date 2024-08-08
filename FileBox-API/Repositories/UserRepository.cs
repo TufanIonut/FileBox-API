@@ -12,7 +12,7 @@ namespace FileBox_API.Repositories
         {
             _dbConnectionFactory = dbConnectionFactory;
         }
-        public async Task<int> LoginAsyncRepo(Login_Register_Request loginRequest)
+        public async Task<int> LoginAsyncRepo(Login_Request loginRequest)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Email", loginRequest.Email);
@@ -33,11 +33,12 @@ namespace FileBox_API.Repositories
                 throw;
             } 
         }
-        public async Task<int> RegisterAsyncRepo(Login_Register_Request registerRequest)
+        public async Task<int> RegisterAsyncRepo(Register_Request registerRequest)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Email", registerRequest.Email);
             parameters.Add("@Password", registerRequest.Password);
+            parameters.Add("@Username", registerRequest.Username);
             parameters.Add("@IdUser", dbType: DbType.Int32, direction: ParameterDirection.Output);
             try
             {

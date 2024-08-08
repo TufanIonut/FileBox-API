@@ -7,6 +7,5 @@
         public string FileName { get; set; }
         public string FileType { get; set; }
         public string FileLink { get; set; }
-        public DateTime Date { get; set; }
     }
 }

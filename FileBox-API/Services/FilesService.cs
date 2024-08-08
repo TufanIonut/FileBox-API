@@ -27,7 +27,10 @@ namespace FileBox_API.Services
                 System.IO.File.Copy(addFileRequest.FileLink, finalPath);
 
                 await Task.CompletedTask;
+                finalPath.Replace(@"\", @"\\");
+                addFileRequest.FileLink = finalPath;
 
+                addFileRequest.FileType = extension;
                 
             }
             catch (Exception ex)
@@ -36,6 +39,33 @@ namespace FileBox_API.Services
             }
             var resultRepo = await _filesRepository.AddFileAsyncRepo(addFileRequest);
             return resultRepo;
+        }
+        public async Task<int> RenameFileAsyncService(RenameFile_Request renameFileRequest)
+        {
+            if (string.IsNullOrEmpty(renameFileRequest.Path) || !System.IO.File.Exists(renameFileRequest.Path))
+            {
+                throw new Exception("File not found");
+            }
+
+            try
+            {
+                string curentFileName = Path.GetFileName(renameFileRequest.Path);
+                string directory = Path.GetDirectoryName(renameFileRequest.Path);
+
+
+                string extension = Path.GetExtension(renameFileRequest.Path); 
+                string newFilePath = Path.Combine(directory, renameFileRequest.NewFileName + extension);
+
+                System.IO.File.Move(renameFileRequest.Path, newFilePath);
+
+                int resultRepo = await _filesRepository.RenameFileAsyncRepo(renameFileRequest,curentFileName);
+
+                return resultRepo;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
