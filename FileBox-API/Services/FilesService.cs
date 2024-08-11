@@ -55,10 +55,12 @@ namespace FileBox_API.Services
 
                 string extension = Path.GetExtension(renameFileRequest.Path); 
                 string newFilePath = Path.Combine(directory, renameFileRequest.NewFileName + extension);
-
+                
                 System.IO.File.Move(renameFileRequest.Path, newFilePath);
-
-                int resultRepo = await _filesRepository.RenameFileAsyncRepo(renameFileRequest,curentFileName);
+                var curentFileNameWithoutExtension = Path.GetFileNameWithoutExtension(renameFileRequest.Path);
+                renameFileRequest.Path = newFilePath;
+                
+                int resultRepo = await _filesRepository.RenameFileAsyncRepo(renameFileRequest, curentFileNameWithoutExtension);
 
                 return resultRepo;
             }
@@ -66,6 +68,25 @@ namespace FileBox_API.Services
             {
                 throw new Exception(ex.Message);
             }
+        }
+        public async Task<int> DeleteFileAsyncService(string path)
+        {
+            if (string.IsNullOrEmpty(path) || !System.IO.File.Exists(path))
+            {
+                throw new Exception("File not found");
+            }
+
+            try
+            {
+                System.IO.File.Delete(path);
+                await Task.CompletedTask;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            var resultRepo = await _filesRepository.DeleteFileAsyncRepo(path);
+            return resultRepo;
         }
     }
 }

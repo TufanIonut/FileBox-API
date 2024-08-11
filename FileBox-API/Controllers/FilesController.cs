@@ -73,7 +73,12 @@ namespace FileBox_API.Controllers
         {
             try
             {
+                
                 var result = await _filesService.RenameFileAsyncService(renameFileRequest);
+                if(result == 0)
+                {
+                    return BadRequest("File not found");
+                }   
                 return Ok();
             }
             catch (Exception)
@@ -82,5 +87,90 @@ namespace FileBox_API.Controllers
             }
         }
 
+        [HttpPatch("softDeleteFile")]
+        public async Task<IActionResult> SoftDeleteFileAsyncController(int idFile)
+        {
+            try
+            {
+                var result = await _filesRepository.SoftDeleteFileAsyncRepo(idFile);
+                if(result == 0)
+                {
+                    return BadRequest("File not found");
+                }   
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("File not found");
+            }
+        }
+        [HttpPatch("addFileToSafe")]
+        public async Task<IActionResult> AddFileToSafeAsyncController(int idFile)
+        {
+            try
+            {
+                var result = await _filesRepository.AddFileToSafeAsyncRepo(idFile);
+                if(result == 0)
+                {
+                    return BadRequest("File not found");
+                }   
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("File not found");
+            }
+        }
+        [HttpPut("removeFileFromSafe")]
+        public async Task<IActionResult> RemoveFileFromSafeAsyncController(int idFile)
+        {
+            try
+            {
+                var result = await _filesRepository.RemoveFileFromSafeAsyncRepo(idFile);
+                if(result == 0)
+                {
+                    return BadRequest("File not found");
+                }   
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("File not found");
+            }
+        }
+        [HttpPut("removeFileFromBin")]
+        public async Task<IActionResult> RemoveFileFromBinAsyncController(int idFile)
+        {
+            try
+            {
+                var result = await _filesRepository.RemoveFileFromBinAsyncRepo(idFile);
+                if(result == 0)
+                {
+                    return BadRequest("File not found");
+                }   
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("File not found");
+            }
+        }
+        [HttpDelete("deleteFile")]
+        public async Task<IActionResult> DeleteFileAsyncController(string path)
+        {
+            try
+            {
+                var result = await _filesRepository.DeleteFileAsyncRepo(path);
+                if(result == 0)
+                {
+                    return BadRequest("File not found");
+                }   
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("File not found");
+            }
+        }
     }
 }

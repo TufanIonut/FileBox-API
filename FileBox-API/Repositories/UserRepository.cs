@@ -55,5 +55,68 @@ namespace FileBox_API.Repositories
                 throw;
             }
         }
+        public async Task<int> AddProfilePictureAsyncRepo(Add_UpdatePP_Request addProfilePictureRequest)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@IdUser", addProfilePictureRequest.IdUser);
+            parameters.Add("@ProfilePicture", addProfilePictureRequest.ProfilePicture);
+            parameters.Add("@Success", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            try
+            {
+                using (var connection = _dbConnectionFactory.ConnectToDataBase())
+                {
+                    await connection.ExecuteAsync("sp_AddOrUpdateProfilePicture", parameters, commandType: CommandType.StoredProcedure);
+
+                    return parameters.Get<int>("@Success");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public async Task<int> AddSafePasswordAsyncRepo(Add_UpdateSafePass_Request addSafePasswordRequest)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@IdUser", addSafePasswordRequest.IdUser);
+            parameters.Add("@SafePassword", addSafePasswordRequest.SafePassword);
+            parameters.Add("@Success", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            try
+            {
+                using (var connection = _dbConnectionFactory.ConnectToDataBase())
+                {
+                    await connection.ExecuteAsync("sp_AddOrUpdateSafePassword", parameters, commandType: CommandType.StoredProcedure);
+
+                    return parameters.Get<int>("@Success");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public async Task<int> LoginSafePasswordAsyncRepo(LoginSafePass_Request loginSafePasswordRequest)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@IdUser", loginSafePasswordRequest.IdUser);
+            parameters.Add("@SafePassword", loginSafePasswordRequest.safePassword);
+            parameters.Add("@IsMatch", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            try
+            {
+                using (var connection = _dbConnectionFactory.ConnectToDataBase())
+                {
+                    await connection.ExecuteAsync("sp_LoginSafePassword", parameters, commandType: CommandType.StoredProcedure);
+
+                    return parameters.Get<int>("@IsMatch");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -7,8 +7,8 @@
         public int IdUser { get; set; }
         public string FileTypeName { get; set; }
         public string FileLink { get; set; }
-        public bool IsDeleted { get; set; }
-        public bool IsSafe { get; set; }
+        public int IsDeleted { get; set; }
+        public int IsSafe { get; set; }
         public DateTime UploadDate { get; set; }
 
     }

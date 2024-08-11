@@ -49,5 +49,47 @@ namespace FileBox_API.Controllers
                 return BadRequest("User exists already");
             }
         }
+        [HttpPost]
+        [Route("AddProfilePicture")]
+        public async Task<IActionResult> AddProfilePictureAsync(Add_UpdatePP_Request addProfilePictureRequest)
+        {
+            var result = await _userRepository.AddProfilePictureAsyncRepo(addProfilePictureRequest);
+            if (result == 1)
+            {
+                return Ok("Profile picture added");
+            }
+            else
+            {
+                return BadRequest("Profile picture not added");
+            }
+        }
+        [HttpPost]
+        [Route("AddSafePassword")]
+        public async Task<IActionResult> AddSafePasswordAsync(Add_UpdateSafePass_Request addSafePasswordRequest)
+        {
+            var result = await _userRepository.AddSafePasswordAsyncRepo(addSafePasswordRequest);
+            if (result == 1)
+            {
+                return Ok("Safe password added");
+            }
+            else
+            {
+                return BadRequest("Safe password not added");
+            }
+        }
+        [HttpPatch("LoginSafePassword")]
+        
+        public async Task<IActionResult> LoginSafePasswordAsync(LoginSafePass_Request loginSafePassRequest)
+        {
+            var result = await _userRepository.LoginSafePasswordAsyncRepo(loginSafePassRequest);
+            if (result == 1)
+            {
+                return Ok("Safe password correct");
+            }
+            else
+            {
+                return BadRequest("Safe password incorrect");
+            }
+        }
     }
 }

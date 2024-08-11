@@ -6,5 +6,8 @@ namespace FileBox_API.Interfaces
     {
         Task<int> AddFileAsyncService(AddFile_Request addFileRequest);
         Task<int> RenameFileAsyncService(RenameFile_Request renameFileRequest);
+        Task<int> DeleteFileAsyncService(string path);
+
+
     }
 }

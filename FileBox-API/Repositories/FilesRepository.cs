@@ -122,5 +122,115 @@ namespace FileBox_API.Repositories
                 throw;
             }
         }
+        //-----------------------------------------------------------------------------------
+        //SoftDeleteFile Method
+        public async Task<int> SoftDeleteFileAsyncRepo(int idFile)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@IdFile", idFile);
+            parameters.Add("@Success", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            try
+            {
+                using (var connection = _dbConnectionFactory.ConnectToDataBase())
+                {
+                    await connection.ExecuteAsync("sp_SoftDeleteFile", parameters, commandType: CommandType.StoredProcedure);
+
+                    return parameters.Get<int>("@Success");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        //-----------------------------------------------------------------------------------
+        //AddFileToSafe Method  
+        public async Task<int> AddFileToSafeAsyncRepo(int idFile)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@IdFile", idFile);
+            parameters.Add("@Success", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            try
+            {
+                using (var connection = _dbConnectionFactory.ConnectToDataBase())
+                {
+                    await connection.ExecuteAsync("sp_AddToSafe", parameters, commandType: CommandType.StoredProcedure);
+
+                    return parameters.Get<int>("@Success");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        //-----------------------------------------------------------------------------------
+        //RemoveFileFromSafe Method
+        public async Task<int> RemoveFileFromSafeAsyncRepo(int idFile)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@IdFile", idFile);
+            parameters.Add("@Success", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            try
+            {
+                using (var connection = _dbConnectionFactory.ConnectToDataBase())
+                {
+                    await connection.ExecuteAsync("sp_RemoveFileFromSafe", parameters, commandType: CommandType.StoredProcedure);
+
+                    return parameters.Get<int>("@Success");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        //-----------------------------------------------------------------------------------
+        //RemoveFileFromBin Method
+        public async Task<int> RemoveFileFromBinAsyncRepo(int idFile)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@IdFile", idFile);
+            parameters.Add("@Success", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            try
+            {
+                using (var connection = _dbConnectionFactory.ConnectToDataBase())
+                {
+                    await connection.ExecuteAsync("sp_RemoveFileFromBin", parameters, commandType: CommandType.StoredProcedure);
+
+                    return parameters.Get<int>("@Success");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        //-----------------------------------------------------------------------------------
+        //DeleteFile Method
+        public async Task<int> DeleteFileAsyncRepo(string path)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@Path", path);
+            parameters.Add("@Success", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            try
+            {
+                using (var connection = _dbConnectionFactory.ConnectToDataBase())
+                {
+                    await connection.ExecuteAsync("sp_DeleteFile", parameters, commandType: CommandType.StoredProcedure);
+
+                    return parameters.Get<int>("@Success");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
