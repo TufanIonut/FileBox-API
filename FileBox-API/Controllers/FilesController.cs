@@ -160,7 +160,7 @@ namespace FileBox_API.Controllers
         {
             try
             {
-                var result = await _filesRepository.DeleteFileAsyncRepo(path);
+                var result = await _filesService.DeleteFileAsyncService(path);
                 if(result == 0)
                 {
                     return BadRequest("File not found");

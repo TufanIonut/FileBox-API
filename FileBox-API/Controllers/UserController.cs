@@ -91,5 +91,19 @@ namespace FileBox_API.Controllers
                 return BadRequest("Safe password incorrect");
             }
         }
+        [HttpGet]
+        [Route("GetUserDetails")]
+        public async Task<IActionResult> GetUserDetailsAsync(int idUser)
+        {
+            var userDetails = await _userRepository.GetUserDetailsAsyncRepo(idUser);
+            if (userDetails != null)
+            {
+                return Ok(userDetails);
+            }
+            else
+            {
+                return BadRequest("User not found");
+            }
+        }
     }
 }

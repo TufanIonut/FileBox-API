@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using FileBox_API.Interfaces;
 using FileBox_API.Requests;
+using FileBox_API.Responses;
 using System.Data;
 
 namespace FileBox_API.Repositories
@@ -110,6 +111,23 @@ namespace FileBox_API.Repositories
                     await connection.ExecuteAsync("sp_LoginSafePassword", parameters, commandType: CommandType.StoredProcedure);
 
                     return parameters.Get<int>("@IsMatch");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public async Task<GetUserDetails_Response> GetUserDetailsAsyncRepo(int idUser)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@IdUser", idUser);
+            try
+            {
+                using (var connection = _dbConnectionFactory.ConnectToDataBase())
+                {
+                    return await connection.QueryFirstAsync<GetUserDetails_Response>("sp_GetUserDetails", parameters, commandType: CommandType.StoredProcedure);
                 }
             }
             catch (Exception)

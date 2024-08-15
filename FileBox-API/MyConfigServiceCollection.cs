@@ -13,20 +13,23 @@ namespace FileBox_API
             //User 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
-            //-----------------------------
+            //---------------------------------------------------------------
             //WordToPdf
             services.AddScoped<IWordToPdfService, WordToPdfService>();
-            //-----------------------------
+            //---------------------------------------------------------------
             //Infrastructure 
             services.AddScoped<IDbConnectionFactory, DbConnectionFactory>();
-            //-----------------------------
+            //---------------------------------------------------------------
             //Files
             services.AddScoped<IFilesRepository, FilesRepository>();
             services.AddScoped<IFilesService, FilesService>();
-
-            //-----------------------------
+            //---------------------------------------------------------------
             //Folders
             services.AddScoped<IFolderRepository, FolderRepository>();
+            //---------------------------------------------------------------
+            //Shares
+            services.AddScoped<IShareRepository, SharesRepository>();
+            services.AddScoped<IShareService, SharesService>();
             
             return services;
         }
