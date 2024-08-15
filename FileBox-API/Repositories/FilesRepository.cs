@@ -232,5 +232,8 @@ namespace FileBox_API.Repositories
                 throw;
             }
         }
+        //-----------------------------------------------------------------------------------
+        //RenameBatch Method
+
     }
 }

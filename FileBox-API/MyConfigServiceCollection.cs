@@ -25,6 +25,8 @@ namespace FileBox_API
             services.AddScoped<IFilesService, FilesService>();
 
             //-----------------------------
+            //Folders
+            services.AddScoped<IFolderRepository, FolderRepository>();
             
             return services;
         }
