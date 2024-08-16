@@ -214,6 +214,8 @@ namespace FileBox_API.Repositories
         //DeleteFile Method
         public async Task<int> DeleteFileAsyncRepo(string path)
         {
+            path= path.Replace(@"\\", @"\");
+
             var parameters = new DynamicParameters();
             parameters.Add("@Path", path);
             parameters.Add("@Success", dbType: DbType.Int32, direction: ParameterDirection.Output);

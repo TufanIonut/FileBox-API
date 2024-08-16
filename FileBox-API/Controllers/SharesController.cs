@@ -1,6 +1,13 @@
-﻿namespace FileBox_API.Controllers
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace FileBox_API.Controllers
 {
-    public class SharesController
+    [ApiController]
+    [Route("api/[controller]")]
+    public class SharesController : ControllerBase
     {
+        public SharesController()
+        {
+        }
     }
 }

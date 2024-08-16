@@ -38,7 +38,7 @@ builder.Services.AddCors(options => options.AddPolicy(name: "FrontendUI",
 
     {
 
-        policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+        policy.WithOrigins("http://localhost:5500").AllowAnyMethod().AllowAnyHeader();
 
     }
 
@@ -53,7 +53,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors("FrontendUI");
 app.UseAuthorization();
 
 app.MapControllers();
