@@ -119,7 +119,7 @@ namespace FileBox_API.Repositories
                 throw;
             }
         }
-        public async Task<GetUserDetails_Response> GetUserDetailsAsyncRepo(int idUser)
+        public async Task<IEnumerable<GetUserDetails_Response>> GetUserDetailsAsyncRepo(int idUser)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@IdUser", idUser);
@@ -127,7 +127,7 @@ namespace FileBox_API.Repositories
             {
                 using (var connection = _dbConnectionFactory.ConnectToDataBase())
                 {
-                    return await connection.QueryFirstAsync<GetUserDetails_Response>("sp_GetUserDetails", parameters, commandType: CommandType.StoredProcedure);
+                    return await connection.QueryAsync<GetUserDetails_Response>("sp_GetUserDetails", parameters, commandType: CommandType.StoredProcedure);
                 }
             }
             catch (Exception)

@@ -10,6 +10,6 @@ namespace FileBox_API.Interfaces
         Task<int> AddProfilePictureAsyncRepo(Add_UpdatePP_Request addProfilePictureRequest);
         Task<int> AddSafePasswordAsyncRepo(Add_UpdateSafePass_Request addSafePasswordRequest);
         Task<int> LoginSafePasswordAsyncRepo(LoginSafePass_Request loginSafePasswordRequest);
-        Task<GetUserDetails_Response> GetUserDetailsAsyncRepo(int idUser);
+        Task<IEnumerable<GetUserDetails_Response>> GetUserDetailsAsyncRepo(int idUser);
     }
 }
