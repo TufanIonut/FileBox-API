@@ -114,7 +114,7 @@ namespace FileBox_API.Repositories
                 throw;
             }
         }
-        public async Task<GetFiles_Response> GetFilesAsyncInFolderAsyncRepo(int idFolder)
+        public async Task<IEnumerable<GetFiles_Response>> GetFilesAsyncInFolderAsyncRepo(int idFolder)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@IdFolder", idFolder);
@@ -122,7 +122,7 @@ namespace FileBox_API.Repositories
             {
                 using (var connection = _dbConnectionFactory.ConnectToDataBase())
                 {
-                    var result = await connection.QueryFirstOrDefaultAsync<GetFiles_Response>("sp_GetFilesInFolder", parameters, commandType: CommandType.StoredProcedure);
+                    var result = await connection.QueryAsync<GetFiles_Response>("sp_GetFilesInFolder", parameters, commandType: CommandType.StoredProcedure);
                     return result;
                 }
             }

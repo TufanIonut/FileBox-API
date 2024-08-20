@@ -10,6 +10,6 @@ namespace FileBox_API.Interfaces
         Task<int> DeleteFolderAsyncRepo(int idFolder);
         Task<int> RenameFolderAsyncRepo(RenameFolder_Request renameFolderRequest);
         Task<int> AddFileInFolderAsyncRepo(AddFileInFolder_Request addFileInFolderRequest);
-        Task<GetFiles_Response> GetFilesAsyncInFolderAsyncRepo(int idFolder);
+        Task<IEnumerable<GetFiles_Response>> GetFilesAsyncInFolderAsyncRepo(int idFolder);
     }
 }
