@@ -9,5 +9,7 @@ namespace FileBox_API.Interfaces
         Task<IEnumerable<Users_Response>> GetUsersAasyncRepo(int idUser);
         Task<int> InsertSharedFileAsyncRepo(Share_Request shareRequest);
         Task<IEnumerable<Statistics_Response>> GetStatisticsForApplicationAsyncRepo();
+        Task<IEnumerable<GetSharedFiles_Response>> GetSharedFilesAsyncRepo(int IdUser);
+        Task<int> DeleteSharedFile(int IdSharedFile);
     }
 }

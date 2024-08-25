@@ -45,5 +45,27 @@ namespace FileBox_API.Repositories
             }
             
         }
+        public async Task<IEnumerable<GetSharedFiles_Response>> GetSharedFilesAsyncRepo(int IdUser)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add ("@ReceiverId", IdUser);
+            using(var connection = _dbConnectionFactory.ConnectToDataBase())
+            {
+
+                return await connection.QueryAsync<GetSharedFiles_Response>("sp_GetSharedFiles", parameters, commandType: CommandType.StoredProcedure);
+
+            }
+        }
+        public async Task<int> DeleteSharedFile(int IdSharedFile)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@IdSharedFile", IdSharedFile);
+            parameters.Add("@Success", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            using (var connection = _dbConnectionFactory.ConnectToDataBase())
+            {
+                var result = await connection.ExecuteAsync("sp_DeleteSharedFile", parameters, commandType: CommandType.StoredProcedure);
+                return parameters.Get<int>("@Success");
+            }
+        }
     }
 }
